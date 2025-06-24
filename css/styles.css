@@ -7331,6 +7331,11 @@ h3 {
   color: #453643;
   opacity: 1; }
 
+.portfolio-modal .rounded-circle {
+  width: 300px;
+  height: 300px;
+  object-fit: cover; }
+
 .floating-label-form-group {
   position: relative;
   border-bottom: 1px solid #E5C2C0; }
