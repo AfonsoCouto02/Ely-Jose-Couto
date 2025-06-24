@@ -81,7 +81,9 @@
                 <!-- Masthead Subheading-->
                 <p class="pre-wrap masthead-subheading font-weight-light mb-0">&quot;Sylvia Lake knows what crawls under her skin, and she calls it the Nameless.&quot;</p>
                 <!-- Seeking Representation-->
-                <p class="masthead-representation font-weight-bold mt-4 mb-3">SEEKING REPRESENTATION</p>
+                <div class="bg-warning text-center py-3 px-4 mt-4 mb-3 rounded">
+                    <p class="text-dark font-weight-bold mb-0">SEEKING REPRESENTATION</p>
+                </div>
                 <!-- See More Link-->
                 <a class="btn btn-outline-light btn-lg" href="it-crawls-under-your-skin.html">See More</a>
             </div>
@@ -552,17 +554,34 @@ Beware and prepare, a novel will appear here, sooner that you think.</p>
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Contact Section Content-->
-                <div class="row justify-content-center">
-                    <div class="col-lg-4">
-                        <div class="d-flex flex-column align-items-center">
+                <div class="row">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="d-flex flex-column align-items-center justify-content-center h-100">
                             <div class="icon-contact mb-3"><i class="far fa-envelope"></i></div>
-                            <div class="text-muted">Email</div><a class="lead font-weight-bold" href="mailto:elyjosecouto@proton.me">elyjosecouto@proton.me</a>
+                            <div class="text-muted">Email</div>
+                            <a class="lead font-weight-bold" href="mailto:elyjosecouto@proton.me">elyjosecouto@proton.me</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="d-flex flex-column align-items-center">
+                            <div class="substack-widget-container" style="width: 100%; max-width: 400px;">
+                                <!-- Substack widget will be embedded here -->
+                                <div class="bg-light border rounded p-4 text-center">
+                                    <h6 class="mb-2">Subscribe to My Newsletter</h6>
+                                    <p class="text-muted small mb-3">Get updates on new stories and writing insights</p>
+                                    <div class="mb-3">
+                                        <input type="email" class="form-control mb-2" placeholder="Enter your email" id="substack-email">
+                                        <button class="btn btn-primary btn-block" type="button" onclick="subscribeToSubstack()">Subscribe</button>
+                                    </div>
+                                    <small class="text-muted">Powered by Substack</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <footer class="footer text-center">
+        <footer class="footer text-center" style="background-color: #626c60;">
             <div class="container">
                 <div class="row">
                     <!-- Footer Navigation-->
@@ -610,5 +629,25 @@ Beware and prepare, a novel will appear here, sooner that you think.</p>
         <script src="assets/mail/contact_me.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        
+        <!-- Substack Integration Script -->
+        <script>
+            function subscribeToSubstack() {
+                const email = document.getElementById('substack-email').value;
+                if (!email) {
+                    alert('Please enter your email address');
+                    return;
+                }
+                
+                // Placeholder for Substack API integration
+                // Replace this with actual Substack subscription logic
+                alert('Substack integration coming soon! Email: ' + email);
+                
+                // Future implementation:
+                // - Connect to Substack API
+                // - Handle subscription process
+                // - Show success/error messages
+            }
+        </script>
     </body>
 </html>
