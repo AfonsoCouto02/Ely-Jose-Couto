@@ -7336,6 +7336,12 @@ h3 {
   height: 300px;
   object-fit: cover; }
 
+.toggle-arrow {
+  transition: transform 0.3s ease; }
+
+.toggle-arrow.collapsed {
+  transform: rotate(-90deg); }
+
 .floating-label-form-group {
   position: relative;
   border-bottom: 1px solid #E5C2C0; }
