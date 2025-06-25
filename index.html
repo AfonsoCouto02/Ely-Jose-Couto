@@ -574,16 +574,24 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="d-flex flex-column align-items-center">
-                            <div class="substack-widget-container" style="width: 100%; max-width: 400px;">
-                                <!-- Substack widget will be embedded here -->
-                                <div class="bg-light border rounded p-4 text-center">
-                                    <h6 class="mb-2">Subscribe to My Newsletter</h6>
-                                    <p class="text-muted small mb-3">Get updates on new stories and writing insights</p>
-                                    <div class="mb-3">
-                                        <input type="email" class="form-control mb-2" placeholder="Enter your email" id="substack-email">
-                                        <button class="btn btn-primary btn-block" type="button" onclick="subscribeToSubstack()">Subscribe</button>
+                            <div class="w-100" style="max-width: 400px;">
+                                <div class="border rounded p-4 text-center" style="background-color: #f1f3f4;">
+                                    <h6 class="mb-3">Where You Can Find Me</h6>
+                                    <div class="row">
+                                        <div class="col-6 mb-3">
+                                            <a href="https://substack.com/@elyjosecouto" target="_blank" class="btn btn-outline-primary btn-block d-flex flex-column align-items-center py-3" style="text-decoration: none;">
+                                                <i class="fas fa-newspaper fa-2x mb-2"></i>
+                                                <span class="small">Substack</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <a href="https://mastodon.social/@elyjosecouto" target="_blank" class="btn btn-outline-primary btn-block d-flex flex-column align-items-center py-3" style="text-decoration: none;">
+                                                <i class="fab fa-mastodon fa-2x mb-2"></i>
+                                                <span class="small">Mastodon</span>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <small class="text-muted">Powered by Substack</small>
+                                    <p class="text-muted small mb-0">Follow for (eventual) updates on writing stuff</p>
                                 </div>
                             </div>
                         </div>
@@ -639,24 +647,5 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
         
-        <!-- Substack Integration Script -->
-        <script>
-            function subscribeToSubstack() {
-                const email = document.getElementById('substack-email').value;
-                if (!email) {
-                    alert('Please enter your email address');
-                    return;
-                }
-                
-                // Placeholder for Substack API integration
-                // Replace this with actual Substack subscription logic
-                alert('Substack integration coming soon! Email: ' + email);
-                
-                // Future implementation:
-                // - Connect to Substack API
-                // - Handle subscription process
-                // - Show success/error messages
-            }
-        </script>
     </body>
 </html>
