@@ -64,6 +64,15 @@
         $(this).removeClass("floating-label-form-group-with-focus");
       });
     });
+
+    // Toggle arrow rotation for collapse elements
+    $('#queryDetails').on('show.bs.collapse', function () {
+      $('.toggle-arrow').removeClass('collapsed');
+    });
+    
+    $('#queryDetails').on('hide.bs.collapse', function () {
+      $('.toggle-arrow').addClass('collapsed');
+    });
   
   })(jQuery); // End of use strict
   
