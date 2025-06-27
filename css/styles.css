@@ -4242,6 +4242,14 @@ a.close.disabled {
   flex: 1 1 auto;
   padding: 4rem 1rem; }
 
+@media (max-width: 767.98px) {
+  .modal-body {
+    padding: 2rem 1rem; } }
+
+@media (max-width: 575.98px) {
+  .modal-body {
+    padding: 1.5rem 0.5rem; } }
+
 .modal-footer {
   display: flex;
   flex-wrap: wrap;
@@ -5794,6 +5802,13 @@ button.bg-dark:focus {
 .p-5 {
   padding: 3rem !important; }
 
+@media (max-width: 767.98px) {
+  .portfolio-modal .p-5 {
+    padding: 1rem !important; }
+  
+  .portfolio-modal section {
+    margin-bottom: 3rem; } }
+
 .pt-5,
 .py-5 {
   padding-top: 3rem !important; }
@@ -7335,6 +7350,16 @@ h3 {
   width: 300px;
   height: 300px;
   object-fit: cover; }
+
+@media (max-width: 767.98px) {
+  .portfolio-modal .rounded-circle {
+    width: 200px;
+    height: 200px; } }
+
+@media (max-width: 575.98px) {
+  .portfolio-modal .rounded-circle {
+    width: 150px;
+    height: 150px; } }
 
 .toggle-arrow {
   transition: transform 0.3s ease; }
