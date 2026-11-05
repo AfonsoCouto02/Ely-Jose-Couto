@@ -1,0 +1,234 @@
+/* Ely José Couto - site styles. Hand-written, no framework. */
+
+:root {
+  --paper: #EFE4CE;
+  --ink: #1D2421;
+  --muted: #6A6152;
+  --rule: #D5C8AE;
+  --bruise: #4B3324;
+  --bruise-soft: #E4D7BD;
+
+  --measure: 36rem;
+  --gutter: 1.25rem;
+  --hang: 8rem;
+
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1B1815;
+    --ink: #E9E2D2;
+    --muted: #A59A88;
+    --rule: #3A332B;
+    --bruise: #CDAE8E;
+    --bruise-soft: #2B241D;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1B1815; --ink: #E9E2D2; --muted: #A59A88;
+  --rule: #3A332B; --bruise: #CDAE8E; --bruise-soft: #2B241D;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Spectral", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  font-variant-numeric: oldstyle-nums;
+  text-rendering: optimizeLegibility;
+}
+
+/* Centered column. Hanging labels sit in the free space to its left. */
+.wrap {
+  width: 100%;
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+}
+
+/* Header */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 2rem;
+  padding: 2.25rem 0 0;
+}
+.site-name {
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--ink);
+  margin-right: auto;
+}
+.site-header nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.site-header nav a { color: var(--muted); text-decoration: none; }
+.site-header nav a:hover,
+.site-header nav a[aria-current="page"] { color: var(--ink); }
+.site-header nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+main { padding: 4.5rem 0 3rem; }
+
+/* Type */
+h1, h2, h3 { font-weight: 400; line-height: 1.2; margin: 0; }
+h1 { font-size: 2.25rem; font-weight: 300; margin-bottom: 1.5rem; }
+h2 { font-size: 1.125rem; font-style: italic; color: var(--muted); margin-bottom: 0.75rem; }
+h3 { font-size: 1.375rem; margin-bottom: 0.35rem; }
+p { margin: 0 0 1rem; }
+em, i, cite { font-style: italic; }
+
+a { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; text-decoration-color: var(--bruise); }
+a:hover { color: var(--bruise); }
+a:focus-visible { outline: 2px solid var(--bruise); outline-offset: 3px; border-radius: 1px; }
+
+.home-name {
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  line-height: 0.98;
+  margin: 0 0 2rem;
+}
+.lede { font-size: 1.3rem; line-height: 1.55; max-width: 30rem; }
+
+/* Sections: labels hang in the left margin on wide screens */
+.block { position: relative; margin-top: 3.5rem; }
+@media (min-width: 60rem) {
+  .block > h2 {
+    position: absolute;
+    left: calc(-1 * var(--hang));
+    width: calc(var(--hang) - 1.5rem);
+    text-align: right;
+    top: 0.15rem;
+    margin: 0;
+  }
+}
+
+.status { color: var(--bruise); font-style: italic; }
+.meta { color: var(--muted); font-size: 1rem; }
+
+/* Novels */
+.book { display: grid; grid-template-columns: 9.5rem 1fr; gap: 1.75rem; margin-bottom: 3.5rem; }
+.book h3 { margin-top: -0.2rem; }
+.cover { width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; display: block; background: var(--bruise-soft); }
+.book-page .cover { max-width: 14rem; margin-bottom: 2rem; }
+dl.details { display: grid; grid-template-columns: max-content 1fr; gap: 0.2rem 1.25rem; margin: 1.25rem 0; font-size: 1rem; }
+dl.details dt { color: var(--muted); }
+dl.details dd { margin: 0; }
+/* Phones: cover stays beside the text, just smaller */
+@media (max-width: 34rem) {
+  .book { grid-template-columns: 6.5rem 1fr; gap: 1.1rem; margin-bottom: 2.5rem; }
+  .book h3 { font-size: 1.2rem; margin-top: -0.1rem; }
+  .book-page .cover { max-width: 12rem; margin-inline: auto; }
+}
+/* Very narrow phones: stack and center the cover */
+@media (max-width: 21rem) {
+  .book { grid-template-columns: 1fr; }
+  .book .cover { max-width: 8rem; }
+}
+
+/* Stories */
+.story { margin-bottom: 2.25rem; }
+.story:target h3 { color: var(--bruise); }
+.story p { margin-bottom: 0.35rem; }
+
+.poem { white-space: pre-line; font-size: 1.0625rem; line-height: 1.7; margin-top: 1rem; }
+
+.placeholder { background: var(--bruise-soft); padding: 0 0.2em; }
+
+.back { font-size: 1rem; margin-bottom: 2.5rem; }
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: 1.25rem 0 3rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 0.5rem 2rem;
+}
+.site-footer a { color: var(--muted); }
+
+@media (max-width: 40rem) {
+  body { font-size: 1.0625rem; }
+  main { padding-top: 3rem; }
+}
+
+/* Genre hangs in the margin beside each story */
+.genre { color: var(--muted); font-style: italic; font-size: 1rem; margin: 0 0 0.15rem; }
+@media (min-width: 60rem) {
+  .story { position: relative; }
+  .story .genre {
+    position: absolute;
+    left: calc(-1 * var(--hang));
+    width: calc(var(--hang) - 1.5rem);
+    text-align: right;
+    top: 0.35rem;
+    margin: 0;
+  }
+}
+.intro { color: var(--muted); font-style: italic; margin-bottom: 3rem; }
+blockquote { margin: 0 0 1rem; padding: 0; }
+blockquote p { font-style: italic; }
+.byline { color: var(--muted); font-size: 1rem; }
+.home-novels p { margin-bottom: 1.25rem; }
+
+/* Portrait on the bio page: replace assets/img/portrait.jpg with your photo */
+.portrait {
+  width: 9rem; height: 9rem;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: var(--bruise-soft);
+  border: 1px solid var(--rule);
+  margin-bottom: 2rem;
+  color: transparent;
+}
+
+/* Smaller "where to find it" links under each story */
+.find { font-size: 0.875rem; color: var(--muted); }
+.find a { color: var(--muted); }
+.find a:hover { color: var(--bruise); }
+
+/* Smaller "Where You Can Find Me" */
+.block.small { font-size: 0.875rem; line-height: 1.6; margin-top: 3rem; }
+.block.small > h2 { font-size: 0.95rem; }
+.block.small p { max-width: 28rem; }
+
+/* A chapter: a new part of the page, not a label in the margin */
+.chapter {
+  margin-top: 4.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--rule);
+}
+.chapter > h2 {
+  font-size: 1.75rem;
+  font-weight: 300;
+  font-style: normal;
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+}
+
+/* Mobile header: name on its own line, nav on one line below */
+@media (max-width: 40rem) {
+  :root { --gutter: 1.5rem; }
+  .site-header { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding-top: 1.75rem; }
+  .site-name { margin-right: 0; }
+  .site-header nav { flex-wrap: nowrap; gap: 1.1rem; font-size: 1rem; white-space: nowrap; }
+}
+@media (max-width: 23rem) {
+  .site-header nav { gap: 0.85rem; font-size: 0.95rem; }
+}
