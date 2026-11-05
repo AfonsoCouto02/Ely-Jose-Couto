@@ -9,7 +9,7 @@
   --bruise-soft: #E4D7BD;
 
   --measure: 36rem;
-  --margin: clamp(1.25rem, 18vw, 14rem);
+  --gutter: 1.25rem;
   --hang: 8rem;
 
   color-scheme: light;
@@ -49,10 +49,13 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Centered column. Hanging labels sit in the free space to its left. */
 .wrap {
-  margin-left: var(--margin);
-  margin-right: 1.25rem;
-  max-width: var(--measure);
+  width: 100%;
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
 }
 
 /* Header */
@@ -126,9 +129,16 @@ a:focus-visible { outline: 2px solid var(--bruise); outline-offset: 3px; border-
 dl.details { display: grid; grid-template-columns: max-content 1fr; gap: 0.2rem 1.25rem; margin: 1.25rem 0; font-size: 1rem; }
 dl.details dt { color: var(--muted); }
 dl.details dd { margin: 0; }
+/* Phones: cover stays beside the text, just smaller */
 @media (max-width: 34rem) {
-  .book { grid-template-columns: 1fr; gap: 1rem; }
-  .book .cover { max-width: 9.5rem; }
+  .book { grid-template-columns: 6.5rem 1fr; gap: 1.1rem; margin-bottom: 2.5rem; }
+  .book h3 { font-size: 1.2rem; margin-top: -0.1rem; }
+  .book-page .cover { max-width: 12rem; margin-inline: auto; }
+}
+/* Very narrow phones: stack and center the cover */
+@media (max-width: 21rem) {
+  .book { grid-template-columns: 1fr; }
+  .book .cover { max-width: 8rem; }
 }
 
 /* Stories */
@@ -214,8 +224,7 @@ blockquote p { font-style: italic; }
 
 /* Mobile header: name on its own line, nav on one line below */
 @media (max-width: 40rem) {
-  :root { --margin: 1.5rem; }
-  .wrap { margin-right: 1.5rem; }
+  :root { --gutter: 1.5rem; }
   .site-header { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding-top: 1.75rem; }
   .site-name { margin-right: 0; }
   .site-header nav { flex-wrap: nowrap; gap: 1.1rem; font-size: 1rem; white-space: nowrap; }
