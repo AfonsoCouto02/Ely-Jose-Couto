@@ -1,4 +1,6 @@
-/* Ely José Couto - site styles. Hand-written, no framework. */
+/* Ely José Couto - site styles. Hand-written, no framework.
+   One centered column on every page: header, content and footer share
+   the same edges, so nothing hangs outside it and the page sits dead center. */
 
 :root {
   --paper: #EFE4CE;
@@ -7,10 +9,10 @@
   --rule: #D5C8AE;
   --bruise: #4B3324;
   --bruise-soft: #E4D7BD;
+  --rust: #6B2F1A;
 
-  --measure: 36rem;
-  --gutter: 1.25rem;
-  --hang: 8rem;
+  --measure: 46rem;
+  --gutter: 1.5rem;
 
   color-scheme: light;
   box-sizing: border-box;
@@ -19,18 +21,16 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #1B1815;
-    --ink: #E9E2D2;
-    --muted: #A59A88;
-    --rule: #3A332B;
-    --bruise: #CDAE8E;
-    --bruise-soft: #2B241D;
+    --paper: #1B1815; --ink: #E9E2D2; --muted: #A59A88;
+    --rule: #3A332B; --bruise: #CDAE8E; --bruise-soft: #2B241D;
+    --rust: #D9987A;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #1B1815; --ink: #E9E2D2; --muted: #A59A88;
   --rule: #3A332B; --bruise: #CDAE8E; --bruise-soft: #2B241D;
+  --rust: #D9987A;
   color-scheme: dark;
 }
 
@@ -48,8 +48,9 @@ body {
   font-variant-numeric: oldstyle-nums;
   text-rendering: optimizeLegibility;
 }
+img { max-width: 100%; }
 
-/* Centered column. Hanging labels sit in the free space to its left. */
+/* The column */
 .wrap {
   width: 100%;
   max-width: calc(var(--measure) + 2 * var(--gutter));
@@ -66,28 +67,23 @@ body {
   gap: 0.25rem 2rem;
   padding: 2.25rem 0 0;
 }
-.site-name {
-  font-weight: 500;
-  text-decoration: none;
-  color: var(--ink);
-  margin-right: auto;
-}
+.site-name { font-weight: 500; text-decoration: none; color: var(--ink); margin-right: auto; }
 .site-header nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
 .site-header nav a { color: var(--muted); text-decoration: none; }
 .site-header nav a:hover,
 .site-header nav a[aria-current="page"] { color: var(--ink); }
 .site-header nav a[aria-current="page"] {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.3em;
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.3em;
 }
 
-main { padding: 4.5rem 0 3rem; }
+main { padding: 4rem 0 3rem; }
 
 /* Type */
 h1, h2, h3 { font-weight: 400; line-height: 1.2; margin: 0; }
 h1 { font-size: 2.25rem; font-weight: 300; margin-bottom: 1.5rem; }
-h2 { font-size: 1.125rem; font-style: italic; color: var(--muted); margin-bottom: 0.75rem; }
+h2 { font-size: 1.5rem; font-weight: 300; font-style: italic; color: var(--ink); margin-bottom: 1rem; }
+h2 a { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; text-decoration-color: var(--bruise); }
+h2 a:hover { color: var(--bruise); }
 h3 { font-size: 1.375rem; margin-bottom: 0.35rem; }
 p { margin: 0 0 1rem; }
 em, i, cite { font-style: italic; }
@@ -96,61 +92,131 @@ a { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1p
 a:hover { color: var(--bruise); }
 a:focus-visible { outline: 2px solid var(--bruise); outline-offset: 3px; border-radius: 1px; }
 
+.status { color: var(--bruise); font-style: italic; }
+.meta { color: var(--muted); font-size: 1rem; }
+.intro { color: var(--muted); font-style: italic; margin-bottom: 3rem; }
+.byline { color: var(--muted); font-size: 1rem; }
+.back { font-size: 1rem; margin-bottom: 2.5rem; }
+blockquote { margin: 0 0 1rem; padding: 0; }
+blockquote p { font-style: italic; }
+
+/* Sections: a hairline and a small italic label, all inside the column */
+.block {
+  margin-top: 3.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+.block.small { font-size: 0.9375rem; line-height: 1.6; margin-top: 3rem; }
+.block.small > h2 { font-size: 1.15rem; }
+.block.small p { max-width: 32rem; }
+
+/* A chapter: a bigger new part of the page */
+.chapter { margin-top: 4.5rem; padding-top: 2.5rem; border-top: 1px solid var(--rule); }
+.chapter > h2 { font-size: 1.75rem; font-weight: 300; font-style: normal; color: var(--ink); margin-bottom: 1.25rem; }
+
+/* Home: no dividers, just space */
+.home .block { border-top: 0; padding-top: 0; margin-top: 3.5rem; }
+.home .block p { margin-bottom: 0.5rem; }
+.section-intro { margin-bottom: 1.25rem !important; }
+.links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; }
+/* Home nav lines up on the right, like the other pages */
+.home .shelf { background: transparent; border: 0; gap: 0.75rem; }
+
+/* Portrait (home and bio) */
+.portrait {
+  width: 9rem; height: 9rem;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: var(--bruise-soft);
+  border: 1px solid var(--rule);
+  color: transparent;
+  margin: 0;
+}
+
+/* Portrait beside a heading: home hero and bio */
+.hero-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.75rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.hero-head h1 { margin: 0; }
+.home .hero-head .portrait { width: 7rem; height: 7rem; }
+.bio .hero-head .portrait { width: 6rem; height: 6rem; }
+.bio .hero-head { margin-bottom: 2rem; }
+
 .home-name {
-  font-size: clamp(2.75rem, 8vw, 5rem);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
   font-weight: 300;
   letter-spacing: -0.015em;
   line-height: 0.98;
-  margin: 0 0 2rem;
 }
-.lede { font-size: 1.3rem; line-height: 1.55; max-width: 30rem; }
+.tagline { color: var(--muted); font-style: italic; font-size: 1.15rem; line-height: 1.5; margin-bottom: 2rem; }
+.lede { font-size: 1.25rem; line-height: 1.55; }
+.aside { color: var(--muted); font-size: 1rem; }
 
-/* Sections: labels hang in the left margin on wide screens */
-.block { position: relative; margin-top: 3.5rem; }
-@media (min-width: 60rem) {
-  .block > h2 {
-    position: absolute;
-    left: calc(-1 * var(--hang));
-    width: calc(var(--hang) - 1.5rem);
-    text-align: right;
-    top: 0.15rem;
-    margin: 0;
-  }
+/* Home: novels shelf. Tinted panel so it stands out without big cards */
+.shelf {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
 }
+.shelf-book {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1.1rem;
+  align-items: start;
+  padding: 1.1rem;
+  background: var(--bruise-soft);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.shelf-book > a { display: block; }
+.shelf-book h3 { font-size: 1.2rem; margin: -0.15rem 0 0.3rem; }
+.shelf-book p { margin-bottom: 0.4rem; }
+.shelf-book .meta { font-size: 0.9rem; }
+.shelf-book .status { margin: 0; }
 
-.status { color: var(--bruise); font-style: italic; }
-.meta { color: var(--muted); font-size: 1rem; }
-
-/* Novels */
-.book { display: grid; grid-template-columns: 9.5rem 1fr; gap: 1.75rem; margin-bottom: 3.5rem; }
-.book h3 { margin-top: -0.2rem; }
+/* Covers */
 .cover { width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; display: block; background: var(--bruise-soft); }
-.book-page .cover { max-width: 14rem; margin-bottom: 2rem; }
-dl.details { display: grid; grid-template-columns: max-content 1fr; gap: 0.2rem 1.25rem; margin: 1.25rem 0; font-size: 1rem; }
+
+/* Novels page */
+.book { display: grid; grid-template-columns: 10rem 1fr; gap: 2rem; margin-bottom: 3.5rem; align-items: start; }
+.book h3 { margin-top: -0.2rem; }
+
+/* Single book page: cover beside title */
+.book-head {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: 2.25rem;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+.book-head h1 { margin-bottom: 0.5rem; }
+.book-head .meta { margin-bottom: 0.5rem; }
+.book-head .status { margin: 0; }
+
+dl.details { display: grid; grid-template-columns: max-content 1fr; gap: 0.2rem 1.25rem; margin: 1.5rem 0 0; font-size: 1rem; }
 dl.details dt { color: var(--muted); }
 dl.details dd { margin: 0; }
-/* Phones: cover stays beside the text, just smaller */
-@media (max-width: 34rem) {
-  .book { grid-template-columns: 6.5rem 1fr; gap: 1.1rem; margin-bottom: 2.5rem; }
-  .book h3 { font-size: 1.2rem; margin-top: -0.1rem; }
-  .book-page .cover { max-width: 12rem; margin-inline: auto; }
-}
-/* Very narrow phones: stack and center the cover */
-@media (max-width: 21rem) {
-  .book { grid-template-columns: 1fr; }
-  .book .cover { max-width: 8rem; }
-}
 
-/* Stories */
-.story { margin-bottom: 2.25rem; }
+/* Stories: compact list, quick to scan */
+.story { margin-bottom: 1.6rem; font-size: 1rem; line-height: 1.5; }
 .story:target h3 { color: var(--bruise); }
-.story p { margin-bottom: 0.35rem; }
-
+.story h3 { font-size: 1.15rem; margin-bottom: 0.2rem; }
+.story p { margin-bottom: 0.2rem; }
+.genre { color: var(--muted); font-style: italic; font-size: 0.875rem; margin: 0 0 0.1rem; }
+.story .meta, .story .find { font-size: 0.85rem; margin: 0; }
+.story .meta { margin-top: 0.25rem; }
+.find { font-size: 0.875rem; color: var(--muted); }
+.find a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--bruise); }
+.find a:hover { color: var(--bruise); }
 .poem { white-space: pre-line; font-size: 1.0625rem; line-height: 1.7; margin-top: 1rem; }
-
 .placeholder { background: var(--bruise-soft); padding: 0 0.2em; }
-
-.back { font-size: 1rem; margin-bottom: 2.5rem; }
 
 /* Footer */
 .site-footer {
@@ -162,73 +228,201 @@ dl.details dd { margin: 0; }
 }
 .site-footer a { color: var(--muted); }
 
+/* Tablets and phones */
 @media (max-width: 40rem) {
   body { font-size: 1.0625rem; }
   main { padding-top: 3rem; }
-}
-
-/* Genre hangs in the margin beside each story */
-.genre { color: var(--muted); font-style: italic; font-size: 1rem; margin: 0 0 0.15rem; }
-@media (min-width: 60rem) {
-  .story { position: relative; }
-  .story .genre {
-    position: absolute;
-    left: calc(-1 * var(--hang));
-    width: calc(var(--hang) - 1.5rem);
-    text-align: right;
-    top: 0.35rem;
-    margin: 0;
-  }
-}
-.intro { color: var(--muted); font-style: italic; margin-bottom: 3rem; }
-blockquote { margin: 0 0 1rem; padding: 0; }
-blockquote p { font-style: italic; }
-.byline { color: var(--muted); font-size: 1rem; }
-.home-novels p { margin-bottom: 1.25rem; }
-
-/* Portrait on the bio page: replace assets/img/portrait.jpg with your photo */
-.portrait {
-  width: 9rem; height: 9rem;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  background: var(--bruise-soft);
-  border: 1px solid var(--rule);
-  margin-bottom: 2rem;
-  color: transparent;
-}
-
-/* Smaller "where to find it" links under each story */
-.find { font-size: 0.875rem; color: var(--muted); }
-.find a { color: var(--muted); }
-.find a:hover { color: var(--bruise); }
-
-/* Smaller "Where You Can Find Me" */
-.block.small { font-size: 0.875rem; line-height: 1.6; margin-top: 3rem; }
-.block.small > h2 { font-size: 0.95rem; }
-.block.small p { max-width: 28rem; }
-
-/* A chapter: a new part of the page, not a label in the margin */
-.chapter {
-  margin-top: 4.5rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--rule);
-}
-.chapter > h2 {
-  font-size: 1.75rem;
-  font-weight: 300;
-  font-style: normal;
-  color: var(--ink);
-  margin-bottom: 1.25rem;
-}
-
-/* Mobile header: name on its own line, nav on one line below */
-@media (max-width: 40rem) {
-  :root { --gutter: 1.5rem; }
   .site-header { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding-top: 1.75rem; }
   .site-name { margin-right: 0; }
   .site-header nav { flex-wrap: nowrap; gap: 1.1rem; font-size: 1rem; white-space: nowrap; }
+  .shelf { grid-template-columns: 1fr; }
+  .lede { font-size: 1.15rem; }
+  .book-head { grid-template-columns: 8rem 1fr; gap: 1.25rem; }
+  .book-head h1 { font-size: 1.75rem; }
+}
+@media (max-width: 34rem) {
+  .hero-head { gap: 1.1rem; }
+  .home .hero-head .portrait { width: 4.5rem; height: 4.5rem; }
+  .bio .hero-head .portrait { width: 4.5rem; height: 4.5rem; }
+  .book { grid-template-columns: 6.5rem 1fr; gap: 1.1rem; margin-bottom: 2.5rem; }
+  .book h3 { font-size: 1.2rem; margin-top: -0.1rem; }
+  .shelf-book { grid-template-columns: 4.5rem 1fr; }
 }
 @media (max-width: 23rem) {
   .site-header nav { gap: 0.85rem; font-size: 0.95rem; }
+  .book-head { grid-template-columns: 1fr; }
+  .book-head .cover { max-width: 9rem; }
+  .book { grid-template-columns: 1fr; }
+  .book .cover { max-width: 8rem; }
 }
+
+/* Small text: regular weight so it stays legible on the paper colour */
+.meta, .find, .genre, .byline, .aside, .block.small, .site-footer,
+.shelf-book, .back, dl.details, .story { font-weight: 400; }
+.story h3, .shelf-book h3 { font-weight: 400; }
+
+/* Short stories: genre hangs in the margin to the left of the column on wide
+   screens, baseline-aligned with the title. The story extends left into the
+   margin by exactly the label column, so the text column stays centered. */
+@media (min-width: 64rem) {
+  .story {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    column-gap: 1.5rem;
+    margin-left: -10.5rem;
+  }
+  .story > * { grid-column: 2; }
+  .story .genre {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: right;
+    margin: 0;
+    line-height: 1.35;
+    align-self: baseline;
+  }
+  .story > h3 { grid-row: 1; align-self: baseline; }
+}
+
+/* Header: darker nav so it reads apart from the content */
+.site-header nav a { color: var(--ink); font-weight: 400; }
+.site-header nav a:hover { color: var(--bruise); }
+.site-header nav a[aria-current="page"] {
+  color: var(--bruise);
+  text-decoration-color: var(--bruise);
+}
+
+/* Italic accents in ink rather than faded grey */
+.tagline, .intro { color: var(--ink); }
+.genre { color: var(--bruise); }
+
+/* Home: heading links in solid, heavier ink */
+.home h2 a { font-weight: 400; text-decoration-color: var(--ink); }
+
+/* Section headings in a dark rust that sits between the ink and the brown accent */
+h2, h2 a, .home h2 a { color: var(--rust); text-decoration-color: var(--rust); }
+h2 a:hover { color: var(--bruise); }
+
+/* Laptop-friendly sizing: calmer type on larger screens. Phones keep their own sizes. */
+body { font-size: 1.0625rem; }
+.site-header nav { font-size: 1rem; }
+.home-name { font-size: clamp(2.5rem, 7vw, 3.75rem); }
+.lede { font-size: 1.175rem; }
+h2 { font-size: 1.35rem; }
+@media (max-width: 40rem) {
+  .lede { font-size: 1.15rem; }
+  h2 { font-size: 1.5rem; }
+  .site-header nav { font-size: 1rem; }
+}
+@media (max-width: 23rem) {
+  .site-header nav { font-size: 0.95rem; }
+}
+
+/* Book page excerpt: tinted panel like the home shelf, attribution on the right */
+.excerpt {
+  margin: 0;
+  padding: 1.5rem 1.75rem 1.25rem;
+  background: var(--bruise-soft);
+}
+.excerpt blockquote p:last-child { margin-bottom: 0; }
+.excerpt figcaption {
+  margin-top: 1rem;
+  text-align: right;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 400;
+}
+@media (max-width: 34rem) {
+  .excerpt { padding: 1.25rem 1.1rem 1rem; }
+}
+
+/* Book page header: smaller cover, title centred beside it, quieter back link */
+.back { margin-bottom: 1.5rem; font-size: 0.95rem; }
+.back a { color: var(--muted); text-decoration-color: var(--rule); }
+.back a:hover { color: var(--bruise); }
+.book-head {
+  grid-template-columns: 10rem 1fr;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.book-head h1 { font-size: 2.1rem; }
+@media (max-width: 40rem) {
+  .book-head { grid-template-columns: 7rem 1fr; gap: 1.25rem; }
+  .book-head h1 { font-size: 1.6rem; }
+}
+@media (max-width: 23rem) {
+  .book-head { grid-template-columns: 1fr; }
+}
+
+/* Bio: larger portrait beside the heading */
+.bio .hero-head { gap: 2rem; margin-bottom: 2.25rem; }
+.bio .hero-head .portrait { width: 10rem; height: 10rem; }
+@media (max-width: 40rem) {
+  .bio .hero-head .portrait { width: 7.5rem; height: 7.5rem; }
+}
+@media (max-width: 34rem) {
+  .bio .hero-head { gap: 1.25rem; }
+  .bio .hero-head .portrait { width: 6rem; height: 6rem; }
+}
+
+/* ===== Palette: cold bone paper, near-black ink, dried-blood accent =====
+   --bruise is the accent (status, link underlines, hovers): use sparingly.
+   --rust is the section-heading colour: a deep oxblood, nearly ink. */
+:root {
+  --paper: #E4E2DA;
+  --ink: #16191A;
+  --muted: #5B5F5C;
+  --rule: #C8C6BC;
+  --bruise: #7A1C17;
+  --bruise-soft: #D8D6CC;
+  --rust: #4E1714;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #131414;
+    --ink: #E2E0D9;
+    --muted: #999B95;
+    --rule: #2D2F2E;
+    --bruise: #C8685C;
+    --bruise-soft: #1E2020;
+    --rust: #D08A7E;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #131414; --ink: #E2E0D9; --muted: #999B95;
+  --rule: #2D2F2E; --bruise: #C8685C; --bruise-soft: #1E2020; --rust: #D08A7E;
+}
+/* Muted elements that used the accent now stay neutral, so the red stays rare */
+.genre { color: var(--muted); }
+.excerpt figcaption { color: var(--muted); }
+
+/* Handwritten name (assets/img/hand/name.svg): a plain image, so it shows
+   everywhere, including when the page is opened from your own computer.
+   The drawing is black; in dark mode it is inverted to off-white. */
+.hand-name { display: block; height: auto; max-width: 100%; }
+.site-name { display: block; align-self: center; }
+.site-name .hand-name { width: 7.5rem; }
+.home-name .hand-name { width: min(100%, 24rem); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hand-name { filter: invert(0.9); }
+}
+:root[data-theme="dark"] .hand-name { filter: invert(0.9); }
+.site-name:hover .hand-name { opacity: 0.7; }
+@media (max-width: 40rem) {
+  .site-name { align-self: flex-start; }
+  .site-name .hand-name { width: 6.5rem; }
+}
+@media (max-width: 34rem) {
+  .home-name .hand-name { width: 100%; }
+}
+
+/* Handwritten name colours (filters tint the black drawing):
+   dark mode: cream, light mode: ink; red on hover in both. */
+.hand-name { transition: filter 0.2s ease; }
+.site-name:hover .hand-name { opacity: 1; filter: invert(0.22) sepia(1) saturate(6) hue-rotate(-38deg) brightness(0.72); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hand-name { filter: invert(0.88) sepia(0.5) brightness(0.9); }
+  :root:not([data-theme="light"]) .site-name:hover .hand-name { filter: invert(0.5) sepia(1) saturate(2.6) hue-rotate(-38deg) brightness(0.82); }
+}
+:root[data-theme="dark"] .hand-name { filter: invert(0.88) sepia(0.5) brightness(0.9); }
+:root[data-theme="dark"] .site-name:hover .hand-name { filter: invert(0.5) sepia(1) saturate(2.6) hue-rotate(-38deg) brightness(0.82); }
